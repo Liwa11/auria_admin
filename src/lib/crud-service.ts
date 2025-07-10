@@ -5,8 +5,8 @@ export interface CrudService {
   fetchData: (tableName: string) => Promise<any[]>;
   fetchRelatedData: (tableName: string, valueField: string, labelField: string) => Promise<{ value: any; label: string }[]>;
   addRow: (tableName: string, data: any) => Promise<any>;
-  updateRow: (tableName: string, id: number, data: any) => Promise<any>;
-  deleteRow: (tableName: string, id: number) => Promise<void>;
+  updateRow: (tableName: string, id: string | number, data: any) => Promise<any>;
+  deleteRow: (tableName: string, id: string | number) => Promise<void>;
 }
 
 class CrudServiceImpl implements CrudService {
@@ -96,7 +96,7 @@ class CrudServiceImpl implements CrudService {
     }
   }
 
-  async updateRow(tableName: string, id: number, data: any): Promise<any> {
+  async updateRow(tableName: string, id: string | number, data: any): Promise<any> {
     console.log(`✏️ Updating row ${id} in ${tableName}:`, data);
     
     try {
@@ -120,7 +120,7 @@ class CrudServiceImpl implements CrudService {
     }
   }
 
-  async deleteRow(tableName: string, id: number): Promise<void> {
+  async deleteRow(tableName: string, id: string | number): Promise<void> {
     console.log(`🗑️ Deleting row ${id} from ${tableName}`);
     
     try {
